@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Prioridade } from 'src/app/models/Prioridade';
+import { Tarefa } from 'src/app/models/Tarefa';
 
 @Component({
   selector: 'app-lista',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
