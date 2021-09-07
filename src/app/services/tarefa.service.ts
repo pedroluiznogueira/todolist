@@ -17,4 +17,8 @@ export class TarefaService {
   getListaTarefas(): Tarefa[] {
     return this.listaTarefas;
   }
+
+  addTarefa(tarefa: Tarefa): void {
+    this.listaTarefas.push(tarefa);
+  }
 }

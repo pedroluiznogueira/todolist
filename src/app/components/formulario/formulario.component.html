@@ -1,5 +1,5 @@
-<form id="form">
-    <input type="text" name="tf_2do" id="tf_2do" autocomplete="off">
+<form id="form" (submit)="addTarefa()">
+    <input type="text" name="tf_2do" id="tf_2do" [(ngModel)]="texto">
     <button type="submit">Salvar</button>
 </form>
 <app-lista></app-lista>
