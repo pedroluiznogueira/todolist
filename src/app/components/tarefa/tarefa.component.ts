@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Prioridade } from 'src/app/models/Prioridade';
 import { Tarefa } from 'src/app/models/Tarefa';
+import { TarefaService } from 'src/app/services/tarefa.service';
 
 @Component({
   selector: 'app-tarefa',
@@ -9,14 +9,19 @@ import { Tarefa } from 'src/app/models/Tarefa';
 })
 export class TarefaComponent implements OnInit {
 
-  tarefas: Tarefa[] = [
-    { texto: "Estudar pela manhã", feita: false, prioridade: Prioridade.alta },
-    { texto: "Estudar pela tarde", feita: true, prioridade: Prioridade.baixa }
-  ]
+  // array para receber a lista de tarefas do serviço
+  tarefas!: Tarefa[];
 
-  constructor() { }
+  // injetando o serviço
+  constructor(private tarefaService: TarefaService) { }
 
   ngOnInit(): void {
+    // boa prática 
+    this.getTarefas();
+  }
+
+  getTarefas(): void {
+    this.tarefas = this.tarefaService.getListaTarefas(); 
   }
 
 }
