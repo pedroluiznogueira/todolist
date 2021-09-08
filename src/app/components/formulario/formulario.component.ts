@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Prioridade } from 'src/app/models/Prioridade';
 import { Tarefa } from 'src/app/models/Tarefa';
 import { TarefaService } from 'src/app/services/tarefa.service';
@@ -10,6 +10,8 @@ import { TarefaService } from 'src/app/services/tarefa.service';
 })
 export class FormularioComponent implements OnInit {
 
+  @Output() envioFormulario:EventEmitter<Tarefa> = new EventEmitter();
+
   texto!: string;
 
   constructor(private tarefaService: TarefaService) { }
@@ -17,12 +19,18 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addTarefa(): void {
-    const tarefa: Tarefa = {texto: this.texto, feita: true, prioridade: Prioridade.alta };
-    this.tarefaService.addTarefa(tarefa);
+  submeter(texto: string) {
+    this.envioFormulario.emit(this.novaTarefa())
+  }
 
-    let input: HTMLInputElement = <HTMLInputElement>document.getElementById("tf_2do");
-    input.value = "";
+  novaTarefa(): Tarefa{
+    const tarefa: Tarefa = {
+      texto: this.texto,
+      feita: true, 
+      prioridade: Prioridade.alta 
+    };
+
+    return tarefa;
   }
 
 }
