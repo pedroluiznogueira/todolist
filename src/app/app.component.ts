@@ -11,7 +11,6 @@ export class AppComponent {
   title = 'todoListAngular';
 
   constructor(private tarefaService: TarefaService) {
-
   }
 
   // passando a tarefa da emissão para a função de adiciona tarefa do serviço

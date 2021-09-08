@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Tarefa } from 'src/app/models/Tarefa';
 import { TarefaService } from 'src/app/services/tarefa.service';
+import * as uniqid from 'uniqid';
 
 @Component({
   selector: 'app-lista',
@@ -9,8 +10,7 @@ import { TarefaService } from 'src/app/services/tarefa.service';
 })
 export class ListaComponent implements OnInit {
 
-  // variável para comparar para tentar riscar tarefa
-  verificarRiscada: boolean = false;
+  @Output() removerTarefaClick: EventEmitter<Tarefa> = new EventEmitter();
 
   // array para receber a lista de tarefas do serviço
   tarefas!: Tarefa[];
@@ -29,7 +29,11 @@ export class ListaComponent implements OnInit {
   }
 
   riscarTarefa(tarefa: Tarefa): void {
-    // dessa forma não consigo referenciar que só quero que isso seja feito para a tarefa da iteração que cliquei
-    this.verificarRiscada = !this.verificarRiscada; 
+    // a tarefa da iteração do clique, tem seu atributo mudado
+    tarefa.feita = !tarefa.feita; 
+  }
+
+  removerTarefa(tarefa: Tarefa): void {
+    this.tarefaService.removerTarefa(tarefa);
   }
 }

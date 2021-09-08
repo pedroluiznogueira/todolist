@@ -27,6 +27,9 @@ export class FormularioComponent implements OnInit {
 
     // emitindo um evento, e passando como parâmetro a tarefa que vai ser levada junto
     this.envioFormulario.emit(this.novaTarefa())
+
+    // limpando input
+    this.limparInput();
   }
 
   // criando nova tarefa, para ser emitida
@@ -35,10 +38,16 @@ export class FormularioComponent implements OnInit {
       texto: this.texto,
       // se aqui fosse criada como true, não riscaria na lógica atual
       feita: false, 
-      prioridade: Prioridade.alta 
+      prioridade: Prioridade.alta
     };
 
     return tarefa;
+  }
+
+  // limpa input após o envio
+  limparInput() {
+    let input: HTMLInputElement = <HTMLInputElement>document.querySelector("input");
+    input.value = "";
   }
 
 }

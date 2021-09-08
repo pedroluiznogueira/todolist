@@ -18,4 +18,10 @@ export class TarefaService {
   addTarefa(tarefa: Tarefa): void {
     this.listaTarefas.push(tarefa);
   }
+
+  removerTarefa(tarefa: Tarefa): void {
+    console.log(this.listaTarefas.length);
+    this.listaTarefas.splice(this.listaTarefas.indexOf(tarefa), 1);
+    console.log(this.listaTarefas.length);
+  }
 }

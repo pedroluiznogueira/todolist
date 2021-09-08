@@ -1,8 +1,8 @@
 <table id="table">
-    <!-- ngClass aqui verifica para uma variavel global, não referente à tarefa da iteração -->
-    <tr *ngFor="let tarefa of tarefas" [ngClass]="{'done': verificarRiscada}">
+    <!-- ngClass verifica referente ao atributo da tarefa da iteração no momento -->
+    <tr *ngFor="let tarefa of tarefas" [ngClass]="{'done': tarefa.feita}">
         <td><input (click)="riscarTarefa(tarefa)" type="checkbox"></td>
         <td>{{ tarefa.texto }}</td>
-        <td><i class="material-icons">delete</i></td>
+        <td><i (click)="removerTarefa(tarefa)" class="material-icons">delete</i></td>
     </tr>
 </table>
