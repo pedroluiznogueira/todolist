@@ -7,10 +7,7 @@ import { Tarefa } from '../models/Tarefa';
 })
 export class TarefaService {
 
-  listaTarefas: Tarefa[] = [
-    { texto: "Estudar pela manhã", feita: false, prioridade: Prioridade.alta },
-    { texto: "Estudar pela tarde", feita: true, prioridade: Prioridade.baixa }
-  ]
+  listaTarefas: Tarefa[] = []
 
   constructor() { }
 

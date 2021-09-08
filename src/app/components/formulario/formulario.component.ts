@@ -10,8 +10,10 @@ import { TarefaService } from 'src/app/services/tarefa.service';
 })
 export class FormularioComponent implements OnInit {
 
+  // emitindo o evento do envio do formulario, e com ele levando uma tarefa
   @Output() envioFormulario:EventEmitter<Tarefa> = new EventEmitter();
 
+  // valor enviado no input
   texto!: string;
 
   constructor(private tarefaService: TarefaService) { }
@@ -19,14 +21,20 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submeter(texto: string) {
+  // função chamada ao escutar o evento do envio do formulário
+  submeter(): void {
+    if (this.texto == null) return;
+
+    // emitindo um evento, e passando como parâmetro a tarefa que vai ser levada junto
     this.envioFormulario.emit(this.novaTarefa())
   }
 
+  // criando nova tarefa, para ser emitida
   novaTarefa(): Tarefa{
     const tarefa: Tarefa = {
       texto: this.texto,
-      feita: true, 
+      // se aqui fosse criada como true, não riscaria na lógica atual
+      feita: false, 
       prioridade: Prioridade.alta 
     };
 

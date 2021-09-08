@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Prioridade } from 'src/app/models/Prioridade';
 import { Tarefa } from 'src/app/models/Tarefa';
 import { TarefaService } from 'src/app/services/tarefa.service';
 
@@ -22,6 +21,12 @@ export class ListaComponent implements OnInit {
   }
 
   getTarefas(): void {
+    // buscando a lista de tarefas e atribuindo-a à um array de tarefas 
     this.tarefas = this.tarefaService.getListaTarefas(); 
+  }
+
+  riscarTarefa(tarefa: Tarefa): void {
+    // a tarefa da iteração do clique, tem seu atributo mudado
+    tarefa.feita = !tarefa.feita; 
   }
 }

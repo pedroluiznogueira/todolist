@@ -1,13 +1,8 @@
 <table id="table">
-    <tr *ngFor="let tarefa of tarefas">
-        <td>
-            <input type="checkbox">
-        </td>
-        <td>
-            {{ tarefa.texto }}
-        </td>
-        <td>
-            <i class="material-icons">delete</i>
-        </td>
+    <!-- ngClass verifica referente ao atributo da tarefa da iteração no momento -->
+    <tr *ngFor="let tarefa of tarefas" [ngClass]="{'done': tarefa.feita}">
+        <td><input (click)="riscarTarefa(tarefa)" type="checkbox"></td>
+        <td>{{ tarefa.texto }}</td>
+        <td><i class="material-icons">delete</i></td>
     </tr>
 </table>

@@ -14,6 +14,7 @@ export class AppComponent {
 
   }
 
+  // passando a tarefa da emissão para a função de adiciona tarefa do serviço
   adicionarTarefa(tarefa: Tarefa): void {
     this.tarefaService.addTarefa(tarefa);
   }
