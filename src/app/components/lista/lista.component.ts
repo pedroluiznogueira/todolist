@@ -9,6 +9,9 @@ import { TarefaService } from 'src/app/services/tarefa.service';
 })
 export class ListaComponent implements OnInit {
 
+  // variável para comparar para tentar riscar tarefa
+  verificarRiscada: boolean = false;
+
   // array para receber a lista de tarefas do serviço
   tarefas!: Tarefa[];
 
@@ -26,7 +29,7 @@ export class ListaComponent implements OnInit {
   }
 
   riscarTarefa(tarefa: Tarefa): void {
-    // a tarefa da iteração do clique, tem seu atributo mudado
-    tarefa.feita = !tarefa.feita; 
+    // dessa forma não consigo referenciar que só quero que isso seja feito para a tarefa da iteração que cliquei
+    this.verificarRiscada = !this.verificarRiscada; 
   }
 }
