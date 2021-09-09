@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Tarefa } from 'src/app/models/Tarefa';
 import { TarefaService } from 'src/app/services/tarefa.service';
-import * as uniqid from 'uniqid';
 
 @Component({
   selector: 'app-lista',

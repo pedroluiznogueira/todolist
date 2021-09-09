@@ -15,6 +15,8 @@ export class FormularioComponent implements OnInit {
 
   // valor enviado no input
   texto!: string;
+  nivelPrioridade!: string | undefined;
+
 
   constructor(private tarefaService: TarefaService) { }
 
@@ -22,26 +24,20 @@ export class FormularioComponent implements OnInit {
   }
 
   // função chamada ao escutar o evento do envio do formulário
-  submeter(): void {
-    if (this.texto == null) return;
+  submeter(texto: string): void {
+    if (texto == null) return;
 
-    // emitindo um evento, e passando como parâmetro a tarefa que vai ser levada junto
-    this.envioFormulario.emit(this.novaTarefa())
+    if (texto.match(/^#(1|2|3)\s/)) {
+      this.nivelPrioridade = texto.match(/^#(1|2|3)\s/)?.shift()?.slice(0,2);
+      let novaTarefa: Tarefa | undefined = this.adicionarPrioridade(this.nivelPrioridade);
+      this.envioFormulario.emit(novaTarefa);
+    } else {
+      let novaTarefa: Tarefa | undefined = {texto: this.texto, feita: false,prioridade: Prioridade.baixa};
+      this.envioFormulario.emit(novaTarefa);
+    }
 
     // limpando input
     this.limparInput();
-  }
-
-  // criando nova tarefa, para ser emitida
-  novaTarefa(): Tarefa{
-    const tarefa: Tarefa = {
-      texto: this.texto,
-      // se aqui fosse criada como true, não riscaria na lógica atual
-      feita: false, 
-      prioridade: Prioridade.alta
-    };
-
-    return tarefa;
   }
 
   // limpa input após o envio
@@ -49,5 +45,23 @@ export class FormularioComponent implements OnInit {
     let input: HTMLInputElement = <HTMLInputElement>document.querySelector("input");
     input.value = "";
   }
+
+  adicionarPrioridade(nivelPrioridade: string | undefined): Tarefa {
+    if (nivelPrioridade == "#1") {
+        let novaTarefa: Tarefa = {texto: this.texto.slice(3),feita: false,prioridade: Prioridade.baixa};
+        console.log("Prioridade baixa")
+        return novaTarefa;
+
+    } else if (nivelPrioridade == "#2") {
+      let novaTarefa: Tarefa = {texto: this.texto.slice(3),feita: false,prioridade: Prioridade.media};
+        console.log("Prioridade media")
+        return novaTarefa;
+
+    } else {
+        let novaTarefa: Tarefa = {texto: this.texto.slice(3),feita: false,prioridade: Prioridade.alta};
+        console.log("Prioridade alta");
+        return novaTarefa;
+    }
+}
 
 }
